@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2017",                                  
-    "lib": ["es6"],                                        
+    "lib": ["es6", "esnext"],                                        
     "experimentalDecorators": true,                   
     "emitDecoratorMetadata": true,                    
     "module": "commonjs",                                
@@ -11,7 +11,8 @@
       ".src/@types"
     ],                                  
     "resolveJsonModule": true,                        
-    "allowJs": true,                                  
+    "allowJs": true,
+    "sourceMap": true,                             
     "outDir": "./dist",                                   
     "removeComments": true,                           
     "esModuleInterop": true,                             
