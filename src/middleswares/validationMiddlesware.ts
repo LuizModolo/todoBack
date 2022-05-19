@@ -20,7 +20,7 @@ const validateTitle = (
       .json({ error: 'Title must be a string' });
   }
 
-  next();
+  return next();
 };
 
 const validateContent = (
@@ -42,10 +42,33 @@ const validateContent = (
       .json({ error: 'Content must be a string' });
   }
 
-  next();
+  return next();
+};
+
+const validateStatusId = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  const { statusId } = req.body;
+
+  if (!statusId) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ error: 'status is required' });
+  }
+
+  if (typeof statusId !== 'number') {
+    return res
+      .status(StatusCodes.UNPROCESSABLE_ENTITY)
+      .json({ error: 'Status Id must be a number' });
+  }
+
+  return next();
 };
 
 export {
   validateTitle,
   validateContent,
+  validateStatusId,
 };

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { TaskData } from '../interface/interfaces';
+import TaskData from '../interface/interfaces';
 import tasks from '../service/taskService';
 
 const getAllTasks = async (_req: Request, res: Response) => {

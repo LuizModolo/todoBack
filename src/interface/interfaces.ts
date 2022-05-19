@@ -4,6 +4,4 @@ interface TaskData {
   statusId: string,
 }
 
-export {
-  TaskData,
-};
+export default TaskData;

@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { TaskData } from '../interface/interfaces';
+import TaskData from '../interface/interfaces';
 
 const prisma = new PrismaClient();
 
