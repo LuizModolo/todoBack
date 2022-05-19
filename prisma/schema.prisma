@@ -16,7 +16,7 @@ model Tasks {
   updatedAt DateTime @updatedAt
   title     String   @db.VarChar(255)
   content   String
-  status    Status     @relation(fields: [statusId], references: [id])
+  status    Status   @relation(fields: [statusId], references: [id])
   statusId  Int  
 }
 

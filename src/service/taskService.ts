@@ -1,48 +1,62 @@
 import { PrismaClient } from '@prisma/client';
+import { TaskData } from '../interface/interfaces';
 
 const prisma = new PrismaClient();
 
-const listTasksOrderByDate = async () => {
-  const orderedTasks = await prisma.tasks.findMany({
-    orderBy: {
-      createdAt: 'asc',
+const listAllTasks = async () => {
+  const allTasks = await prisma.tasks.findMany({
+    include: {
+      status: true,
     },
   });
 
-  if (!orderedTasks) return null;
+  if (!allTasks) return [];
 
-  return orderedTasks;
+  return allTasks;
 };
 
-const listTasksOrderByTitle = async () => {
-  const orderedTasks = await prisma.tasks.findMany({
-    orderBy: {
-      title: 'asc',
+const createTask = async (data: TaskData) => {
+  const createdTask = await prisma.tasks.create({
+    data: {
+      title: data.title,
+      content: data.content,
+      statusId: Number(data.statusId),
+    },
+    include: {
+      status: true,
     },
   });
 
-  if (!orderedTasks) return null;
-
-  return orderedTasks;
+  return createdTask;
 };
 
-const listTasksFilterByStatus = async (status: string) => {
-  const filteredTasks = await prisma.tasks.findMany({
-    where: {
-      status,
+const updateTask = async (data: TaskData, id: number | undefined) => {
+  const updatedTask = await prisma.tasks.update({
+    where: { id },
+    data: {
+      title: data.title,
+      content: data.content,
+      statusId: Number(data.statusId),
     },
-    orderBy: {
-      title: 'asc',
+    include: {
+      status: true,
     },
   });
 
-  if (!filteredTasks) return null;
+  return updatedTask;
+};
 
-  return filteredTasks;
+const deleteTask = async (id: number | undefined) => {
+  await prisma.tasks.delete({
+    where: { id },
+  });
+
+  return { message: 'successfully deleted' };
 };
 
 export = {
-  listTasksOrderByDate,
-  listTasksOrderByTitle,
-  listTasksFilterByStatus,
-}
+  listAllTasks,
+  createTask,
+  updateTask,
+  deleteTask,
+};
