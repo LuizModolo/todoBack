@@ -11,6 +11,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "prisma": {
+    "seed": "ts-node-dev prisma/seed.ts"
+  },
   "dependencies": {
     "@prisma/client": "^3.14.0",
     "dotenv": "^16.0.1",
